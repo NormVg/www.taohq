@@ -1,39 +1,48 @@
 <script setup lang="ts">
 import { motion } from 'motion-v'
+
+const introWords = "TheAlphaOnes is an independent umbrella organisation behind developer tools, software products, and experimental systems.".split(" ")
 </script>
 
 <template>
   <section id="top" class="hero-section" aria-labelledby="hero-title">
     <h1 id="hero-title">
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }">Building </motion.span>
-      <motion.span :initial="{ opacity: 0, y: 14 }" :animate="{ opacity: 1, y: 0 }" :transition="{ delay: 1.0, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">thoughtful</motion.span>
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }"><br>software, systems, and<br></motion.span>
-      <motion.span :initial="{ opacity: 0, y: 14 }" :animate="{ opacity: 1, y: 0 }" :transition="{ delay: 1.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">lifestyle</motion.span>
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }"> products.</motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }">
+        Building </motion.span>
+      <motion.span :initial="{ opacity: 0, y: 14 }" :animate="{ opacity: 1, y: 0 }"
+        :transition="{ delay: 1.0, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">thoughtful</motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }">
+        <br>software, systems, and<br></motion.span>
+      <motion.span :initial="{ opacity: 0, y: 14 }" :animate="{ opacity: 1, y: 0 }"
+        :transition="{ delay: 1.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">lifestyle</motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }">
+        products.</motion.span>
     </h1>
-    
+
     <div class="hero-actions" aria-label="Hero actions">
       <a class="hero-link hero-link-primary" href="#ventures">Explore ventures</a>
       <a class="hero-link" href="#about">View organization</a>
     </div>
 
-    <motion.div 
-      class="hero-media" 
-      aria-label="Group working around computers"
+    <motion.div class="hero-media" aria-label="Group working around computers"
       :initial="{ opacity: 0, scale: 0.98, filter: 'blur(8px)' }"
       :animate="{ opacity: 1, scale: 1, filter: 'blur(0px)' }"
-      :transition="{ delay: 0.2, duration: 1.8, ease: [0.22, 1, 0.36, 1] }"
-    >
-      <img
-        class="hero-image"
-        src="/figma/hero-mask-image.png"
-        alt="Black and white group working around computers"
-      >
+      :transition="{ delay: 0.2, duration: 1.8, ease: [0.22, 1, 0.36, 1] }">
+      <img class="hero-image" src="/figma/hero-mask-image.png" alt="Black and white group working around computers">
     </motion.div>
 
-    <p class="intro-copy">
-      TheAlphaOnes is an independent umbrella organisation behind developer tools, software
-      products, and experimental systems.
+    <p class="intro-copy" aria-label="TheAlphaOnes is an independent umbrella organisation behind developer tools, software products, and experimental systems.">
+      <motion.span 
+        v-for="(word, i) in introWords" 
+        :key="i"
+        style="display: inline-block; margin-right: 0.28em;"
+        :initial="{ opacity: 0, y: 12, filter: 'blur(4px)' }" 
+        :whileInView="{ opacity: 1, y: 0, filter: 'blur(0px)' }"
+        :viewport="{ once: true, amount: 0.9 }" 
+        :transition="{ duration: 0.8, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }"
+      >
+        {{ word }}
+      </motion.span>
     </p>
   </section>
 </template>

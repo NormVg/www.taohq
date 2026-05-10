@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { motion } from 'motion-v'
+
 const principles = [
   {
     title: 'Calm Infrastructure',
@@ -15,10 +17,25 @@ const principles = [
   <section id="about" class="principles-section" aria-labelledby="organization-title">
     <p id="organization-title" class="section-kicker">Organization</p>
     <span class="section-divider" aria-hidden="true" />
+    
     <div class="principle-list">
-      <article v-for="principle in principles" :key="principle.title" class="principle">
-        <h2>{{ principle.title }}</h2>
-        <p>{{ principle.body }}</p>
+      <article v-for="(principle, i) in principles" :key="principle.title" class="principle">
+        <motion.h2
+          :initial="{ opacity: 0, y: 14 }"
+          :whileInView="{ opacity: 1, y: 0 }"
+          :viewport="{ once: true, amount: 0.5 }"
+          :transition="{ duration: 1.2, delay: i * 0.4, ease: [0.22, 1, 0.36, 1] }"
+        >
+          {{ principle.title }}
+        </motion.h2>
+        <motion.p
+          :initial="{ opacity: 0, filter: 'blur(6px)' }"
+          :whileInView="{ opacity: 1, filter: 'blur(0px)' }"
+          :viewport="{ once: true, amount: 0.5 }"
+          :transition="{ duration: 1.4, delay: 0.2 + (i * 0.4), ease: [0.22, 1, 0.36, 1] }"
+        >
+          {{ principle.body }}
+        </motion.p>
       </article>
     </div>
   </section>
