@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { motion } from 'motion-v'
+
 const navItems = [
   { label: 'Ventures', href: '#ventures' },
   { label: 'Organization', href: '#about' },
@@ -9,9 +11,24 @@ const navItems = [
 <template>
   <header class="site-header" aria-label="Primary navigation">
     <nav class="nav-links">
-      <a v-for="item in navItems" :key="item.label" :href="item.href">{{ item.label }}</a>
+      <a 
+        v-for="item in navItems" 
+        :key="item.label" 
+        :href="item.href"
+      >
+        {{ item.label }}
+      </a>
     </nav>
-    <a class="wordmark" href="#top" aria-label="TheAlphaOnes home">TheAlphaOnes</a>
+    <motion.a 
+      class="wordmark" 
+      href="#top" 
+      aria-label="TheAlphaOnes home"
+      :initial="{ opacity: 0, x: 10, filter: 'blur(4px)' }"
+      :animate="{ opacity: 1, x: 0, filter: 'blur(0px)' }"
+      :transition="{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }"
+    >
+      TheAlphaOnes
+    </motion.a>
   </header>
 </template>
 

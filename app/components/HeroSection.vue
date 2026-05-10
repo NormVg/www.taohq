@@ -1,21 +1,36 @@
+<script setup lang="ts">
+import { motion } from 'motion-v'
+</script>
+
 <template>
   <section id="top" class="hero-section" aria-labelledby="hero-title">
     <h1 id="hero-title">
-      Building thoughtful<br>
-      software, systems, and<br>
-      digital products.
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }">Building </motion.span>
+      <motion.span :initial="{ opacity: 0, y: 14 }" :animate="{ opacity: 1, y: 0 }" :transition="{ delay: 1.0, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">thoughtful</motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }"><br>software, systems, and<br></motion.span>
+      <motion.span :initial="{ opacity: 0, y: 14 }" :animate="{ opacity: 1, y: 0 }" :transition="{ delay: 1.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">lifestyle</motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }"> products.</motion.span>
     </h1>
+    
     <div class="hero-actions" aria-label="Hero actions">
       <a class="hero-link hero-link-primary" href="#ventures">Explore ventures</a>
       <a class="hero-link" href="#about">View organization</a>
     </div>
-    <a class="hero-media" href="#about" aria-label="Jump to about TheAlphaOnes">
+
+    <motion.div 
+      class="hero-media" 
+      aria-label="Group working around computers"
+      :initial="{ opacity: 0, scale: 0.98, filter: 'blur(8px)' }"
+      :animate="{ opacity: 1, scale: 1, filter: 'blur(0px)' }"
+      :transition="{ delay: 0.2, duration: 1.8, ease: [0.22, 1, 0.36, 1] }"
+    >
       <img
         class="hero-image"
         src="/figma/hero-mask-image.png"
         alt="Black and white group working around computers"
       >
-    </a>
+    </motion.div>
+
     <p class="intro-copy">
       TheAlphaOnes is an independent umbrella organisation behind developer tools, software
       products, and experimental systems.
@@ -34,6 +49,13 @@
   letter-spacing: 0;
   line-height: 1.034;
   margin: 0;
+}
+
+.highlight {
+  display: inline-block;
+  text-decoration: underline;
+  text-decoration-thickness: clamp(1px, 0.2vw, 3px);
+  text-underline-offset: clamp(4px, 0.6vw, 8px);
 }
 
 .hero-actions {
@@ -76,25 +98,13 @@
   display: block;
   margin-top: clamp(47px, 4.42vw, 76px);
   overflow: hidden;
-  text-decoration: none;
 }
 
 .hero-image {
   display: block;
   height: 100%;
   object-fit: cover;
-  transition: filter 220ms ease, transform 420ms ease;
   width: 100%;
-}
-
-.hero-media:hover .hero-image,
-.hero-media:focus-visible .hero-image {
-  filter: contrast(1.08);
-  transform: scale(1.018);
-}
-
-.hero-media:active .hero-image {
-  transform: scale(1.006);
 }
 
 .intro-copy {
