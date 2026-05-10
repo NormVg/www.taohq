@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { motion, useInView } from 'motion-v'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 type Venture = {
   title: string
@@ -50,11 +50,25 @@ const sectionRef = ref<HTMLElement | null>(null)
 const activeIndex = ref(0)
 const isLocked = ref(false)
 const direction = ref<'up' | 'down'>('down')
-
-/** Parallax offset per image — shifts opposite to scroll direction */
 const imageOffsets = ref<number[]>(ventures.map(() => 0))
-
 const activeVenture = computed(() => ventures[activeIndex.value] ?? ventures[0])
+
+// useInView on the outer tall section — works correctly with sticky children
+const isVisible = useInView(sectionRef, { once: true, amount: 0.15 })
+
+// Each part gets its own entry animation driven by isVisible
+const imgAnimate = computed(() => isVisible.value
+  ? { opacity: 1, filter: 'blur(0px)', y: 0 }
+  : { opacity: 0, filter: 'blur(10px)', y: 16 }
+)
+const listAnimate = (i: number) => computed(() => isVisible.value
+  ? { opacity: 1, x: 0, transition: { duration: 1, delay: 0.5 + i * 0.12, ease: [0.22, 1, 0.36, 1] } }
+  : { opacity: 0, x: -12 }
+)
+const detailAnimate = computed(() => isVisible.value
+  ? { opacity: 1, filter: 'blur(0px)', transition: { duration: 1, delay: 1.2, ease: [0.22, 1, 0.36, 1] } }
+  : { opacity: 0, filter: 'blur(8px)' }
+)
 
 /* ---------- Scroll-linked Native Sticky Navigation ---------- */
 function handleScroll() {
@@ -119,8 +133,12 @@ onUnmounted(() => {
     
     <div class="ventures-sticky-frame">
       <div class="ventures-viewport">
-      <!-- Left: Image Frame -->
-      <div class="ventures-media-frame">
+      <!-- Left: Image Frame — enters first -->
+      <motion.div class="ventures-media-frame"
+        :initial="{ opacity: 0, filter: 'blur(10px)', y: 16 }"
+        :animate="imgAnimate"
+        :transition="{ duration: 1.6, delay: 0, ease: [0.22, 1, 0.36, 1] }"
+      >
         <motion.div v-for="(venture, index) in ventures" :key="venture.title" class="ventures-media-layer"
           :initial="false" :animate="{
             opacity: activeIndex === index ? 1 : 0,
@@ -132,25 +150,30 @@ onUnmounted(() => {
           <img class="ventures-media-image" :src="venture.image" :alt="venture.title"
             :style="{ objectPosition: venture.imagePosition }" />
         </motion.div>
-      </div>
+      </motion.div>
 
-      <!-- Index list -->
+      <!-- Index list — staggered in after image -->
       <div class="ventures-index-list" aria-label="Ventures">
         <motion.button v-for="(venture, index) in ventures" :key="venture.title" class="ventures-index-item"
-          :class="{ 'is-active': activeIndex === index }" type="button" :whileHover="{ x: 4 }"
-          :whilePress="{ scale: 0.985, x: 2 }" :transition="{ type: 'spring', stiffness: 360, damping: 28 }"
+          :class="{ 'is-active': activeIndex === index }" type="button"
+          :whileHover="{ x: 4 }"
+          :whilePress="{ scale: 0.985, x: 2 }"
+          :initial="{ opacity: 0, x: -12 }"
+          :animate="listAnimate(index).value"
           @click="activeIndex = index">
           <span class="ventures-index-number">{{ index }}.</span>
           <span class="ventures-index-name">{{ venture.title }}</span>
         </motion.button>
       </div>
 
-      <!-- Credit -->
+      <!-- Credit — static -->
       <p class="ventures-credit">made with ♥ by taohq</p>
 
-      <!-- Detail / Info -->
-      <motion.div :key="activeVenture.title" class="ventures-detail" :initial="{ opacity: 0, filter: 'blur(8px)' }"
-        :animate="{ opacity: 1, filter: 'blur(0px)' }" :transition="{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }">
+      <!-- Detail / Info — arrives last -->
+      <motion.div :key="activeVenture.title" class="ventures-detail"
+        :initial="{ opacity: 0, filter: 'blur(8px)' }"
+        :animate="isVisible ? { opacity: 1, filter: 'blur(0px)' } : { opacity: 0, filter: 'blur(8px)' }"
+        :transition="{ duration: 0.8, delay: activeVenture === ventures[0] ? 1.4 : 0, ease: [0.22, 1, 0.36, 1] }">
         <p>{{ activeVenture.body }}</p>
         <div class="ventures-links">
           <a :href="activeVenture.linkHref">Link</a>
