@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { motion, useInView } from 'motion-v'
+import { computed, ref } from 'vue'
+
 const footerColumns = [
   {
     title: 'Ventures',
@@ -20,40 +23,100 @@ const socialLinks = [
   { label: 'Email', icon: '/figma/email.svg' },
   { label: 'GitHub', icon: '/figma/github.svg' },
 ]
+
+// Split the belief sentence into tagged word objects
+// Words marked highlight: true get an underline and reveal first
+const beliefWords = [
+  { text: 'We', highlight: false },
+  { text: 'believe', highlight: false },
+  { text: 'software', highlight: false },
+  { text: 'should', highlight: false },
+  { text: 'feel', highlight: false },
+  { text: 'understandable,', highlight: true },  // reveals first
+  { text: 'durable,', highlight: false },
+  { text: 'and', highlight: false },
+  { text: 'calm.', highlight: false },
+]
+
+const footerRef = ref<HTMLElement | null>(null)
+const isFooterVisible = useInView(footerRef, { once: true, amount: 0.1 })
+
+// Stagger delays: highlighted word first (delay 0), rest after (delay 0.6+)
+const wordDelay = (i: number, highlight: boolean) => {
+  if (highlight) return 0.1
+  // words before the highlight index
+  if (i < 5) return 0.7 + i * 0.05
+  // words after the highlight
+  return 0.8 + i * 0.05
+}
 </script>
 
 <template>
-  <footer id="contact" class="site-footer">
+  <footer id="contact" ref="footerRef" class="site-footer">
+    <!-- Act 1: Belief statement — word by word with underlined keyword first -->
     <div class="footer-belief">
-      <p>We believe software should feel understandable, durable, and calm.</p>
+      <p
+        aria-label="We believe software should feel understandable, durable, and calm."
+      >
+        <motion.span
+          v-for="(word, i) in beliefWords"
+          :key="i"
+          :class="{ 'belief-highlight': word.highlight }"
+          style="display: inline-block; margin-right: 0.22em;"
+          :initial="{ opacity: 0, y: word.highlight ? 18 : 10, filter: word.highlight ? 'blur(4px)' : 'blur(0px)' }"
+          :animate="isFooterVisible ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}"
+          :transition="{ duration: word.highlight ? 1.2 : 0.9, delay: wordDelay(i, word.highlight), ease: [0.22, 1, 0.36, 1] }"
+        >{{ word.text }}</motion.span>
+      </p>
     </div>
 
+    <!-- Act 2: Riser bars grow bottom-up sequentially -->
     <div class="footer-risers" aria-hidden="true">
-      <span />
-      <span />
-      <span />
-      <span />
-      <span />
+      <motion.span
+        v-for="n in 5"
+        :key="n"
+        :initial="{ scaleY: 0, transformOrigin: 'bottom' }"
+        :animate="isFooterVisible ? { scaleY: 1 } : {}"
+        :transition="{ duration: 0.7, delay: 1.4 + (n - 1) * 0.08, ease: [0.22, 1, 0.36, 1] }"
+        style="transform-origin: bottom;"
+      />
     </div>
 
+    <!-- Act 3: Main footer content -->
     <div class="footer-main">
       <div class="footer-top">
         <div class="footer-brand">
-          <p class="footer-wordmark">TheAlphaOnes</p>
+          <!-- Wordmark blurs in -->
+          <motion.p
+            class="footer-wordmark"
+            :initial="{ opacity: 0, filter: 'blur(6px)' }"
+            :animate="isFooterVisible ? { opacity: 1, filter: 'blur(0px)' } : {}"
+            :transition="{ duration: 1.2, delay: 1.8, ease: [0.22, 1, 0.36, 1] }"
+          >TheAlphaOnes</motion.p>
+          <!-- Brand copy static — already anchors the layout -->
           <p>
             Independent software, systems, and digital products designed to feel calm under
             pressure.
           </p>
         </div>
 
+        <!-- Link columns slide up staggered -->
         <div class="footer-link-groups">
-          <div v-for="column in footerColumns" :key="column.title" class="footer-links">
+          <motion.div
+            v-for="(column, ci) in footerColumns"
+            :key="column.title"
+            class="footer-links"
+            :initial="{ opacity: 0, y: 20 }"
+            :animate="isFooterVisible ? { opacity: 1, y: 0 } : {}"
+            :transition="{ duration: 1, delay: 2.0 + ci * 0.15, ease: [0.22, 1, 0.36, 1] }"
+          >
             <h2>{{ column.title }}</h2>
             <a v-for="link in column.links" :key="link" href="#">{{ link }}</a>
-          </div>
+          </motion.div>
         </div>
       </div>
 
+      <!-- Bottom bar: static -->
       <div class="footer-bottom">
         <div>
           <p>taohq.org</p>
@@ -74,7 +137,7 @@ const socialLinks = [
 
 <style scoped>
 .site-footer {
-  margin-top: clamp(58px, 6.55vw, 113px);
+  margin-top: clamp(100px, 12vw, 200px);
   position: relative;
 }
 
@@ -88,7 +151,11 @@ const socialLinks = [
   margin: 0 auto;
   max-width: 1728px;
   text-align: center;
-  transform: translateY(-0.07em); /* Lifted slightly so commas clear the line */
+  transform: translateY(-0.14em); /* Raised so underline clears the first bar */
+}
+
+.belief-highlight {
+  /* Underline removed — animation timing still driven by this class */
 }
 
 .footer-risers {
