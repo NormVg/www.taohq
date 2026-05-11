@@ -39,16 +39,39 @@ const beliefWords = [
 ]
 
 const footerRef = ref<HTMLElement | null>(null)
-const isFooterVisible = useInView(footerRef, { once: true, amount: 0.1 })
+const isFooterVisible = useInView(footerRef, { once: false, amount: 0.1, margin: "0px 0px -15% 0px" })
 
-// Stagger delays: highlighted word first (delay 0), rest after (delay 0.6+)
+// Stagger delays for entrance only
 const wordDelay = (i: number, highlight: boolean) => {
   if (highlight) return 0.1
-  // words before the highlight index
   if (i < 5) return 0.7 + i * 0.05
-  // words after the highlight
   return 0.8 + i * 0.05
 }
+
+// Separate transitions for smooth IN (with delays) vs OUT (no delays)
+const beliefTransition = (i: number, highlight: boolean) => computed(() =>
+  isFooterVisible.value
+    ? { duration: highlight ? 1.2 : 0.9, delay: wordDelay(i, highlight), ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] }
+)
+
+const riserTransition = (n: number) => computed(() =>
+  isFooterVisible.value
+    ? { duration: 0.7, delay: 1.4 + (n - 1) * 0.08, ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.6, delay: 0, ease: [0.22, 1, 0.36, 1] }
+)
+
+const brandTransition = computed(() =>
+  isFooterVisible.value
+    ? { duration: 1.2, delay: 1.8, ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] }
+)
+
+const linkTransition = (ci: number) => computed(() =>
+  isFooterVisible.value
+    ? { duration: 1, delay: 2.0 + ci * 0.15, ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] }
+)
 </script>
 
 <template>
@@ -64,8 +87,8 @@ const wordDelay = (i: number, highlight: boolean) => {
           :class="{ 'belief-highlight': word.highlight }"
           style="display: inline-block; margin-right: 0.22em;"
           :initial="{ opacity: 0, y: word.highlight ? 18 : 10, filter: word.highlight ? 'blur(4px)' : 'blur(0px)' }"
-          :animate="isFooterVisible ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}"
-          :transition="{ duration: word.highlight ? 1.2 : 0.9, delay: wordDelay(i, word.highlight), ease: [0.22, 1, 0.36, 1] }"
+          :animate="isFooterVisible ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: word.highlight ? 18 : 10, filter: word.highlight ? 'blur(4px)' : 'blur(0px)' }"
+          :transition="beliefTransition(i, word.highlight).value"
         >{{ word.text }}</motion.span>
       </p>
     </div>
@@ -76,8 +99,8 @@ const wordDelay = (i: number, highlight: boolean) => {
         v-for="n in 5"
         :key="n"
         :initial="{ scaleY: 0, transformOrigin: 'bottom' }"
-        :animate="isFooterVisible ? { scaleY: 1 } : {}"
-        :transition="{ duration: 0.7, delay: 1.4 + (n - 1) * 0.08, ease: [0.22, 1, 0.36, 1] }"
+        :animate="isFooterVisible ? { scaleY: 1 } : { scaleY: 0 }"
+        :transition="riserTransition(n).value"
         style="transform-origin: bottom;"
       />
     </div>
@@ -90,8 +113,8 @@ const wordDelay = (i: number, highlight: boolean) => {
           <motion.p
             class="footer-wordmark"
             :initial="{ opacity: 0, filter: 'blur(6px)' }"
-            :animate="isFooterVisible ? { opacity: 1, filter: 'blur(0px)' } : {}"
-            :transition="{ duration: 1.2, delay: 1.8, ease: [0.22, 1, 0.36, 1] }"
+            :animate="isFooterVisible ? { opacity: 1, filter: 'blur(0px)' } : { opacity: 0, filter: 'blur(6px)' }"
+            :transition="brandTransition.value"
           >TheAlphaOnes</motion.p>
           <!-- Brand copy static — already anchors the layout -->
           <p>
@@ -107,8 +130,8 @@ const wordDelay = (i: number, highlight: boolean) => {
             :key="column.title"
             class="footer-links"
             :initial="{ opacity: 0, y: 20 }"
-            :animate="isFooterVisible ? { opacity: 1, y: 0 } : {}"
-            :transition="{ duration: 1, delay: 2.0 + ci * 0.15, ease: [0.22, 1, 0.36, 1] }"
+            :animate="isFooterVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }"
+            :transition="linkTransition(ci).value"
           >
             <h2>{{ column.title }}</h2>
             <a v-for="link in column.links" :key="link" href="#">{{ link }}</a>

@@ -1,7 +1,23 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
+import { motion, useInView } from 'motion-v'
+import { computed, ref } from 'vue'
 
 const introWords = "TheAlphaOnes is an independent umbrella organisation behind developer tools, software products, and experimental systems.".split(" ")
+
+const introRef = ref<HTMLElement | null>(null)
+const isIntroVisible = useInView(introRef, { once: false, amount: 0.3, margin: "-15% 0px 0px 0px" })
+
+const wordAnimate = (i: number) => computed(() =>
+  isIntroVisible.value
+    ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+    : { opacity: 0, y: -12, filter: 'blur(4px)' }
+)
+
+const wordTransition = (i: number) => computed(() =>
+  isIntroVisible.value
+    ? { duration: 0.8, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.6, delay: 0, ease: [0.22, 1, 0.36, 1] }
+)
 </script>
 
 <template>
@@ -31,15 +47,14 @@ const introWords = "TheAlphaOnes is an independent umbrella organisation behind 
       <img class="hero-image" src="/figma/hero-mask-image.png" alt="Black and white group working around computers">
     </motion.div>
 
-    <p class="intro-copy" aria-label="TheAlphaOnes is an independent umbrella organisation behind developer tools, software products, and experimental systems.">
+    <p ref="introRef" class="intro-copy" aria-label="TheAlphaOnes is an independent umbrella organisation behind developer tools, software products, and experimental systems.">
       <motion.span 
         v-for="(word, i) in introWords" 
         :key="i"
         style="display: inline-block; margin-right: 0.28em;"
         :initial="{ opacity: 0, y: 12, filter: 'blur(4px)' }" 
-        :whileInView="{ opacity: 1, y: 0, filter: 'blur(0px)' }"
-        :viewport="{ once: true, amount: 0.9 }" 
-        :transition="{ duration: 0.8, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }"
+        :animate="wordAnimate(i).value"
+        :transition="wordTransition(i).value"
       >
         {{ word }}
       </motion.span>

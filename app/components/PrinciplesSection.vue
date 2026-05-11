@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
+import { motion, useInView } from 'motion-v'
+import { computed, ref } from 'vue'
 
 const principles = [
   {
@@ -11,29 +12,57 @@ const principles = [
     body: 'Technical thoughtfulness means anticipating failure states and designing robust architectures. We believe in building digital products that withstand scale without sacrificing precision or performance.',
   },
 ]
+
+// Individual refs and visibility trackers per principle
+const articleRef0 = ref<HTMLElement | null>(null)
+const articleRef1 = ref<HTMLElement | null>(null)
+const isVisible0 = useInView(articleRef0, { once: false, amount: 0.4, margin: "-15% 0px -15% 0px" })
+const isVisible1 = useInView(articleRef1, { once: false, amount: 0.4, margin: "-15% 0px -15% 0px" })
+
+const articleRefs = [articleRef0, articleRef1]
+const isVisibleArr = [isVisible0, isVisible1]
+
+const headingAnimate = (i: number) => computed(() =>
+  isVisibleArr[i].value
+    ? { opacity: 1, y: 0 }
+    : { opacity: 0, y: -14 }
+)
+const bodyAnimate = (i: number) => computed(() =>
+  isVisibleArr[i].value
+    ? { opacity: 1, filter: 'blur(0px)' }
+    : { opacity: 0, filter: 'blur(6px)' }
+)
+
+// Slow entrance, smooth exit without delay
+const headingTransition = (i: number) => computed(() =>
+  isVisibleArr[i].value
+    ? { duration: 1.2, ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] }
+)
+const bodyTransition = (i: number) => computed(() =>
+  isVisibleArr[i].value
+    ? { duration: 1.4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] }
+)
 </script>
 
 <template>
   <section id="about" class="principles-section" aria-labelledby="organization-title">
     <p id="organization-title" class="section-kicker">Organization</p>
     <span class="section-divider" aria-hidden="true" />
-    
+
     <div class="principle-list">
-      <article v-for="(principle, i) in principles" :key="principle.title" class="principle">
-        <motion.h2
-          :initial="{ opacity: 0, y: 14 }"
-          :whileInView="{ opacity: 1, y: 0 }"
-          :viewport="{ once: true, amount: 0.5 }"
-          :transition="{ duration: 1.2, delay: i * 0.4, ease: [0.22, 1, 0.36, 1] }"
-        >
+      <article v-for="(principle, i) in principles" :key="principle.title" :ref="(el) => { if (el) articleRefs[i].value = el as HTMLElement }" class="principle">
+        <motion.h2 
+          :initial="{ opacity: 0, y: 14 }" 
+          :animate="headingAnimate(i).value"
+          :transition="headingTransition(i).value">
           {{ principle.title }}
         </motion.h2>
-        <motion.p
-          :initial="{ opacity: 0, filter: 'blur(6px)' }"
-          :whileInView="{ opacity: 1, filter: 'blur(0px)' }"
-          :viewport="{ once: true, amount: 0.5 }"
-          :transition="{ duration: 1.4, delay: 0.2 + (i * 0.4), ease: [0.22, 1, 0.36, 1] }"
-        >
+        <motion.p 
+          :initial="{ opacity: 0, filter: 'blur(6px)' }" 
+          :animate="bodyAnimate(i).value"
+          :transition="bodyTransition(i).value">
           {{ principle.body }}
         </motion.p>
       </article>

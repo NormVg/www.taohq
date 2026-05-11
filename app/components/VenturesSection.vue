@@ -54,7 +54,7 @@ const imageOffsets = ref<number[]>(ventures.map(() => 0))
 const activeVenture = computed(() => ventures[activeIndex.value] ?? ventures[0])
 
 // useInView on the outer tall section — works correctly with sticky children
-const isVisible = useInView(sectionRef, { once: true, amount: 0.15 })
+const isVisible = useInView(sectionRef, { once: false, amount: 0.15 })
 
 // Each part gets its own entry animation driven by isVisible
 const imgAnimate = computed(() => isVisible.value
