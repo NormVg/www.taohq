@@ -48,11 +48,11 @@ const wordTransition = (i: number) => computed(() =>
     </motion.div>
 
     <p ref="introRef" class="intro-copy" aria-label="TheAlphaOnes is an independent umbrella organisation behind developer tools, software products, and experimental systems.">
-      <motion.span 
-        v-for="(word, i) in introWords" 
+      <motion.span
+        v-for="(word, i) in introWords"
         :key="i"
         style="display: inline-block; margin-right: 0.28em;"
-        :initial="{ opacity: 0, y: 12, filter: 'blur(4px)' }" 
+        :initial="{ opacity: 0, y: 12, filter: 'blur(4px)' }"
         :animate="wordAnimate(i).value"
         :transition="wordTransition(i).value"
       >
@@ -68,11 +68,12 @@ const wordTransition = (i: number) => computed(() =>
 }
 
 .hero-section h1 {
-  font-size: clamp(47px, 7.12vw, 123px);
+  font-size: clamp(40px, 7.12vw, 123px);
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.034;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
   margin: 0;
+  padding: 0 var(--page-gutter);
 }
 
 .highlight {
@@ -132,26 +133,49 @@ const wordTransition = (i: number) => computed(() =>
 }
 
 .intro-copy {
-  font-size: clamp(18px, 2.05vw, 36px);
-  line-height: 1.15;
+  font-size: clamp(17px, 2.05vw, 36px);
+  line-height: 1.35;
   margin: clamp(42px, 3.85vw, 66px) var(--page-gutter) 0;
   max-width: 700px;
 }
 
 @media (max-width: 780px) {
   .hero-section h1 {
-    font-size: clamp(42px, 12vw, 76px);
+    font-size: clamp(32px, 9vw, 64px);
+    line-height: 1.1;
   }
 }
 
 @media (max-width: 520px) {
   .hero-section {
-    padding-top: 47px;
+    padding-top: 32px;
+  }
+
+  .hero-section h1 {
+    font-size: clamp(28px, 8.5vw, 48px);
+    line-height: 1.15;
   }
 
   .hero-actions {
     align-items: flex-start;
     flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .hero-link {
+    font-size: 15px;
+    min-height: 40px;
+  }
+
+  .hero-media {
+    margin-top: 32px;
+  }
+
+  .intro-copy {
+    font-size: clamp(16px, 5vw, 24px);
+    line-height: 1.45;
+    margin-top: 32px;
   }
 }
 </style>

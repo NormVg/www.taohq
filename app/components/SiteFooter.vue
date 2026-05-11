@@ -78,31 +78,20 @@ const linkTransition = (ci: number) => computed(() =>
   <footer id="contact" ref="footerRef" class="site-footer">
     <!-- Act 1: Belief statement — word by word with underlined keyword first -->
     <div class="footer-belief">
-      <p
-        aria-label="We believe software should feel understandable, durable, and calm."
-      >
-        <motion.span
-          v-for="(word, i) in beliefWords"
-          :key="i"
-          :class="{ 'belief-highlight': word.highlight }"
+      <p aria-label="We believe software should feel understandable, durable, and calm.">
+        <motion.span v-for="(word, i) in beliefWords" :key="i" :class="{ 'belief-highlight': word.highlight }"
           style="display: inline-block; margin-right: 0.22em;"
           :initial="{ opacity: 0, y: word.highlight ? 18 : 10, filter: word.highlight ? 'blur(4px)' : 'blur(0px)' }"
           :animate="isFooterVisible ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: word.highlight ? 18 : 10, filter: word.highlight ? 'blur(4px)' : 'blur(0px)' }"
-          :transition="beliefTransition(i, word.highlight).value"
-        >{{ word.text }}</motion.span>
+          :transition="beliefTransition(i, word.highlight).value">{{ word.text }}</motion.span>
       </p>
     </div>
 
     <!-- Act 2: Riser bars grow bottom-up sequentially -->
     <div class="footer-risers" aria-hidden="true">
-      <motion.span
-        v-for="n in 5"
-        :key="n"
-        :initial="{ scaleY: 0, transformOrigin: 'bottom' }"
-        :animate="isFooterVisible ? { scaleY: 1 } : { scaleY: 0 }"
-        :transition="riserTransition(n).value"
-        style="transform-origin: bottom;"
-      />
+      <motion.span v-for="n in 5" :key="n" :initial="{ scaleY: 0, transformOrigin: 'bottom' }"
+        :animate="isFooterVisible ? { scaleY: 1 } : { scaleY: 0 }" :transition="riserTransition(n).value"
+        style="transform-origin: bottom;" />
     </div>
 
     <!-- Act 3: Main footer content -->
@@ -110,12 +99,9 @@ const linkTransition = (ci: number) => computed(() =>
       <div class="footer-top">
         <div class="footer-brand">
           <!-- Wordmark blurs in -->
-          <motion.p
-            class="footer-wordmark"
-            :initial="{ opacity: 0, filter: 'blur(6px)' }"
+          <motion.p class="footer-wordmark" :initial="{ opacity: 0, filter: 'blur(6px)' }"
             :animate="isFooterVisible ? { opacity: 1, filter: 'blur(0px)' } : { opacity: 0, filter: 'blur(6px)' }"
-            :transition="brandTransition.value"
-          >TheAlphaOnes</motion.p>
+            :transition="brandTransition.value">TheAlphaOnes</motion.p>
           <!-- Brand copy static — already anchors the layout -->
           <p>
             Independent software, systems, and digital products designed to feel calm under
@@ -125,14 +111,9 @@ const linkTransition = (ci: number) => computed(() =>
 
         <!-- Link columns slide up staggered -->
         <div class="footer-link-groups">
-          <motion.div
-            v-for="(column, ci) in footerColumns"
-            :key="column.title"
-            class="footer-links"
-            :initial="{ opacity: 0, y: 20 }"
-            :animate="isFooterVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }"
-            :transition="linkTransition(ci).value"
-          >
+          <motion.div v-for="(column, ci) in footerColumns" :key="column.title" class="footer-links"
+            :initial="{ opacity: 0, y: 20 }" :animate="isFooterVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }"
+            :transition="linkTransition(ci).value">
             <h2>{{ column.title }}</h2>
             <a v-for="link in column.links" :key="link" href="#">{{ link }}</a>
           </motion.div>
@@ -174,7 +155,8 @@ const linkTransition = (ci: number) => computed(() =>
   margin: 0 auto;
   max-width: 1728px;
   text-align: center;
-  transform: translateY(-0.14em); /* Raised so underline clears the first bar */
+  transform: translateY(-0.14em);
+  /* Raised so underline clears the first bar */
 }
 
 .belief-highlight {
@@ -248,7 +230,7 @@ const linkTransition = (ci: number) => computed(() =>
   white-space: nowrap;
 }
 
-.footer-brand > p:not(.footer-wordmark) {
+.footer-brand>p:not(.footer-wordmark) {
   color: rgb(255 255 255 / 60%);
   font-size: clamp(16px, 1.46vw, 25px);
   line-height: 1.18;
@@ -309,7 +291,7 @@ const linkTransition = (ci: number) => computed(() =>
   margin: 0;
 }
 
-.footer-bottom p + p {
+.footer-bottom p+p {
   margin-top: 9px;
 }
 
@@ -344,39 +326,117 @@ const linkTransition = (ci: number) => computed(() =>
 }
 
 .social-links img {
-  max-height: 62%;
-  max-width: 62%;
+  /* max-height: 45%; */
+  max-width: 45%;
 }
 
 @media (max-width: 780px) {
+  .site-footer {
+    margin-top: clamp(80px, 10vw, 140px);
+  }
+
+  .footer-belief p {
+    font-size: clamp(28px, 7vw, 64px);
+    line-height: 1.1;
+  }
+
+  .footer-risers {
+    gap: clamp(12px, 2.5vw, 20px);
+    margin-bottom: clamp(20px, 4vw, 36px);
+  }
+
+  .footer-risers span:nth-child(1) {
+    height: clamp(4px, 0.8vw, 6px);
+  }
+
+  .footer-risers span:nth-child(2) {
+    height: clamp(6px, 1.2vw, 10px);
+  }
+
+  .footer-risers span:nth-child(3) {
+    height: clamp(10px, 1.8vw, 16px);
+  }
+
+  .footer-risers span:nth-child(4) {
+    height: clamp(16px, 2.8vw, 26px);
+  }
+
+  .footer-risers span:nth-child(5) {
+    height: clamp(26px, 4.2vw, 42px);
+  }
+
+  .footer-main {
+    padding: clamp(28px, 5vw, 52px) var(--page-gutter) clamp(24px, 4vw, 40px);
+  }
+
   .footer-top,
   .footer-bottom {
     grid-template-columns: 1fr;
   }
 
+  .footer-wordmark {
+    font-size: clamp(40px, 8vw, 60px);
+  }
+
+  .footer-brand>p:not(.footer-wordmark) {
+    font-size: clamp(15px, 4vw, 20px);
+    line-height: 1.35;
+    margin-top: clamp(20px, 4vw, 32px);
+  }
+
   .footer-link-groups {
-    gap: 28px;
+    gap: 24px;
     grid-template-columns: repeat(3, 1fr);
-    margin-top: 48px;
+    margin-top: 40px;
+  }
+
+  .footer-links h2,
+  .footer-links a {
+    font-size: clamp(13px, 3.5vw, 16px);
   }
 
   .footer-bottom {
     align-items: start;
+    margin-top: clamp(32px, 5vw, 52px);
+    padding-top: clamp(20px, 4vw, 32px);
+  }
+
+  .footer-bottom p {
+    font-size: clamp(12px, 3.2vw, 15px);
   }
 
   .social-links {
     justify-content: start;
+    margin-top: 20px;
   }
 }
 
 @media (max-width: 520px) {
+  .footer-belief p {
+    font-size: clamp(24px, 6.5vw, 36px);
+    line-height: 1.2;
+  }
+
   .footer-link-groups {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .footer-links {
+    gap: clamp(8px, 2vw, 12px);
+  }
+
+  .footer-links h2 {
+    margin-bottom: clamp(4px, 1.5vw, 8px);
+  }
+
+  .social-links {
+    gap: 12px;
   }
 
   .social-links a {
-    height: 34px;
-    width: 34px;
+    height: 36px;
+    width: 36px;
   }
 }
 </style>

@@ -11,17 +11,17 @@ const navItems = [
 <template>
   <header class="site-header" aria-label="Primary navigation">
     <nav class="nav-links">
-      <a 
-        v-for="item in navItems" 
-        :key="item.label" 
+      <a
+        v-for="item in navItems"
+        :key="item.label"
         :href="item.href"
       >
         {{ item.label }}
       </a>
     </nav>
-    <motion.a 
-      class="wordmark" 
-      href="#top" 
+    <motion.a
+      class="wordmark"
+      href="#top"
       aria-label="TheAlphaOnes home"
       :initial="{ opacity: 0, x: 10, filter: 'blur(4px)' }"
       :animate="{ opacity: 1, x: 0, filter: 'blur(0px)' }"
@@ -101,28 +101,42 @@ const navItems = [
 
 @media (max-width: 780px) {
   .site-header {
-    gap: 28px;
-    padding-top: 24px;
+    gap: 24px;
+    padding-top: 20px;
   }
 
   .nav-links {
     flex-wrap: wrap;
-    gap: 12px 22px;
+    gap: 10px 20px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
   }
 
   .wordmark {
-    font-size: 44px;
+    font-size: 38px;
   }
 }
 
 @media (max-width: 520px) {
   .site-header {
-    align-items: stretch;
-    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding-top: 16px;
+  }
+
+  .nav-links {
+    gap: 8px 16px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    min-height: 32px;
   }
 
   .wordmark {
-    align-self: flex-end;
+    font-size: 36px;
+    margin-top: 0;
   }
 }
 </style>

@@ -75,7 +75,7 @@ function handleScroll() {
   if (!sectionRef.value) return
 
   const rect = sectionRef.value.getBoundingClientRect()
-  
+
   // Total scrollable distance inside this section
   // It is the total height of the section minus the 100vh sticky viewport
   const maxScroll = rect.height - window.innerHeight
@@ -130,7 +130,7 @@ onUnmounted(() => {
 
 <template>
   <section id="ventures" ref="sectionRef" class="ventures-section" aria-labelledby="ventures-title" :style="{ height: `${ventures.length * 100}vh` }">
-    
+
     <div class="ventures-sticky-frame">
       <div class="ventures-viewport">
       <!-- Left: Image Frame — enters first -->
@@ -399,65 +399,141 @@ onUnmounted(() => {
 /* ── Responsive ── */
 @media (max-width: 980px) {
   .ventures-section {
+    height: calc(var(--venture-count, 4) * 100vh) !important;
+  }
+
+  .ventures-sticky-frame {
+    position: sticky;
+    top: 0;
     height: 100vh;
+    padding: 0 var(--page-gutter);
+    display: flex;
+    flex-direction: column;
   }
 
   .ventures-viewport {
-    column-gap: 36px;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto 1fr;
-    padding-top: clamp(60px, 8vh, 80px);
-    padding-bottom: clamp(30px, 4vh, 60px);
+    column-gap: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    padding-top: clamp(48px, 7vh, 72px);
+    padding-bottom: clamp(32px, 5vh, 56px);
   }
 
   .ventures-media-frame {
-    grid-column: 1;
-    grid-row: 1;
-    aspect-ratio: 1.2 / 0.7;
+    aspect-ratio: 16 / 9;
+    grid-column: unset;
+    grid-row: unset;
+    order: 1;
+    width: 100%;
+    flex-shrink: 0;
   }
 
   .ventures-index-list {
-    grid-column: 1;
-    grid-row: 2;
-    margin-top: 28px;
+    grid-column: unset;
+    grid-row: unset;
+    order: 2;
+    margin-top: 20px;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .ventures-index-item {
+    column-gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgb(0 0 0 / 8%);
+    min-height: 44px;
+  }
+
+  .ventures-index-item:first-child {
+    border-top: 1px solid rgb(0 0 0 / 8%);
   }
 
   .ventures-credit {
-    grid-column: 1;
-    grid-row: 3;
-    margin-top: 16px;
+    grid-column: unset;
+    grid-row: unset;
+    order: 3;
+    margin-top: 12px;
+    flex-shrink: 0;
   }
 
   .ventures-detail {
-    grid-column: 1;
-    grid-row: 4;
+    grid-column: unset;
+    grid-row: unset;
+    order: 4;
     max-width: 100%;
+    width: 100%;
     align-self: start;
-    margin-top: 28px;
+    margin-top: 16px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .ventures-scroll-hint {
+    display: flex;
+    justify-content: center;
   }
 }
 
 @media (max-width: 640px) {
+  .ventures-section {
+    height: calc(var(--venture-count, 4) * 100vh) !important;
+  }
+
+  .ventures-sticky-frame {
+    padding: 0 var(--page-gutter);
+  }
+
   .ventures-viewport {
     padding-top: clamp(40px, 6vh, 60px);
+    padding-bottom: clamp(28px, 4vh, 44px);
   }
 
   .ventures-media-frame {
-    aspect-ratio: 1.06 / 0.72;
+    aspect-ratio: 4 / 3;
   }
 
-  .ventures-detail p {
-    font-size: clamp(15px, 4.8vw, 22px);
+  .ventures-index-list {
+    margin-top: 16px;
+  }
+
+  .ventures-index-item {
+    padding: 8px 0;
+    min-height: 40px;
   }
 
   .ventures-index-number,
   .ventures-index-name {
-    font-size: clamp(16px, 5.6vw, 24px);
+    font-size: clamp(14px, 4vw, 17px);
+  }
+
+  .ventures-credit {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  .ventures-detail {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgb(0 0 0 / 10%);
+  }
+
+  .ventures-detail p {
+    font-size: clamp(13px, 3.8vw, 16px);
+    line-height: 1.5;
   }
 
   .ventures-links {
-    flex-wrap: wrap;
-    gap: 14px 24px;
+    gap: 10px 18px;
+    margin-top: 14px;
+  }
+
+  .ventures-links a {
+    font-size: 13px;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 </style>

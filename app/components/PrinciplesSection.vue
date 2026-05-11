@@ -53,14 +53,14 @@ const bodyTransition = (i: number) => computed(() =>
 
     <div class="principle-list">
       <article v-for="(principle, i) in principles" :key="principle.title" :ref="(el) => { if (el) articleRefs[i].value = el as HTMLElement }" class="principle">
-        <motion.h2 
-          :initial="{ opacity: 0, y: 14 }" 
+        <motion.h2
+          :initial="{ opacity: 0, y: 14 }"
           :animate="headingAnimate(i).value"
           :transition="headingTransition(i).value">
           {{ principle.title }}
         </motion.h2>
-        <motion.p 
-          :initial="{ opacity: 0, filter: 'blur(6px)' }" 
+        <motion.p
+          :initial="{ opacity: 0, filter: 'blur(6px)' }"
           :animate="bodyAnimate(i).value"
           :transition="bodyTransition(i).value">
           {{ principle.body }}
@@ -129,18 +129,35 @@ const bodyTransition = (i: number) => computed(() =>
 
 @media (max-width: 780px) {
   .principles-section {
-    gap: 32px;
+    gap: 28px;
     grid-template-columns: 1fr;
+    margin-top: clamp(60px, 10vw, 100px);
+  }
+
+  .section-kicker {
+    font-size: clamp(16px, 4vw, 22px);
   }
 
   .section-divider {
-    height: 2px;
+    height: 1px;
     min-height: 0;
     width: 100%;
   }
 
   .principle-list {
+    gap: clamp(36px, 8vw, 56px);
     padding-top: 0;
+    padding-right: 0;
+  }
+
+  .principle h2 {
+    font-size: clamp(26px, 6.5vw, 38px);
+    margin-bottom: clamp(14px, 3.5vw, 20px);
+  }
+
+  .principle p {
+    font-size: clamp(16px, 4.2vw, 22px);
+    line-height: 1.4;
   }
 }
 </style>
