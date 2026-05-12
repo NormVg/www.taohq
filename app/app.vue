@@ -1,3 +1,18 @@
+<script setup lang="ts">
+useSeoMeta({
+  title: 'TheAlphaOnes — Thoughtful Software, Systems & Lifestyle Products',
+  description: 'An independent umbrella organisation behind developer tools, software products, and experimental systems. Building thoughtful software, systems, and lifestyle products.',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+})
+
+defineOgImage({
+  component: 'OgImageDefault',
+  title: 'Building thoughtful software, systems, and lifestyle products.',
+  description: 'An independent umbrella organisation behind developer tools, software products, and experimental systems.',
+})
+</script>
+
 <template>
   <NuxtRouteAnnouncer />
 

@@ -1,0 +1,67 @@
+# TheAlphaOnes — Full Content
+
+> URL: https://www.taohq.org
+> Last updated: 2025-05-13
+
+---
+
+## About
+
+TheAlphaOnes is an independent umbrella organisation behind developer tools, software products, and experimental systems. We believe software should feel understandable, durable, and calm.
+
+We build independent software, systems, and digital products designed to feel calm under pressure.
+
+---
+
+## Principles
+
+### Calm Infrastructure
+
+We design systems that prioritize utility over disruption. Our infrastructure is built to remain invisible, operating with a quiet reliability that allows users to focus on their work rather than the tools they use.
+
+### Scalable Craft
+
+Technical thoughtfulness means anticipating failure states and designing robust architectures. We believe in building digital products that withstand scale without sacrificing precision or performance.
+
+---
+
+## Ventures
+
+### Common Design
+
+Shared design infrastructure for consistent product language, calmer defaults, and repeatable interaction patterns across ventures.
+
+### Sober.Spend
+
+A quieter financial tool that helps people read spending clearly and make deliberate choices without unnecessary interface pressure.
+
+### Fold.tao
+
+A structured notes and workflow system designed around low-friction capture, review, and operational clarity over time.
+
+### TheAlphaOnes
+
+The umbrella operating layer behind tools, products, and experiments that need shared infrastructure without losing craft.
+
+---
+
+## Belief
+
+We believe software should feel understandable, durable, and calm.
+
+---
+
+## Contact & Links
+
+- Website: https://www.taohq.org
+- Contact: https://www.taohq.org/#contact
+- Organization: https://www.taohq.org/#about
+- Ventures: https://www.taohq.org/#ventures
+
+---
+
+## Navigation
+
+- Ventures: https://www.taohq.org/#ventures
+- Organization: https://www.taohq.org/#about
+- Contact: https://www.taohq.org/#contact
