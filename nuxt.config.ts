@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/seo', 'motion-v/nuxt'],
 
   site: {
-    url: 'https://www.taohq.org',
+    url: process.env.NUXT_SITE_URL || 'https://www.taohq.org',
     name: 'TheAlphaOnes',
     description: 'An independent umbrella organisation behind developer tools, software products, and experimental systems.',
     defaultLocale: 'en',
