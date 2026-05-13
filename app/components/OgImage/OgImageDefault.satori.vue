@@ -44,14 +44,15 @@ defineProps<{
     <!-- Top: wordmark -->
     <div
       style="
-        font-family: 'Italianno', cursive;
-        font-size: 64px;
+        font-family: 'Inter', sans-serif;
+        font-size: 22px;
         font-weight: 400;
+        letter-spacing: 0.01em;
         line-height: 1;
-        color: #fff;
+        color: rgba(255,255,255,0.5);
       "
     >
-      TheAlphaOnes
+      taohq
     </div>
 
     <!-- Middle: title -->
