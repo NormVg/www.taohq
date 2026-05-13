@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const site = useSiteConfig()
+
 useSeoMeta({
   title: 'TheAlphaOnes — Thoughtful Software, Systems & Lifestyle Products',
   description: 'An independent umbrella organisation behind developer tools, software products, and experimental systems. Building thoughtful software, systems, and lifestyle products.',
@@ -14,16 +16,16 @@ defineOgImage('OgImageDefault', {
 useSchemaOrg([
   defineOrganization({
     name: 'TheAlphaOnes',
-    url: 'https://www.taohq.org',
-    logo: 'https://www.taohq.org/favicon.ico',
+    url: site.url,
+    logo: `${site.url}/favicon.ico`,
     sameAs: [
       'https://github.com/thealphaones',
       'https://twitter.com/thealphaones',
     ],
   }),
   defineWebSite({
-    name: 'TheAlphaOnes',
-    description: 'An independent umbrella organisation behind developer tools, software products, and experimental systems.',
+    name: site.name,
+    description: site.description,
   }),
 ])
 </script>
