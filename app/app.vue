@@ -11,6 +11,22 @@ defineOgImage({
   title: 'Building thoughtful software, systems, and lifestyle products.',
   description: 'An independent umbrella organisation behind developer tools, software products, and experimental systems.',
 })
+
+useSchemaOrg([
+  defineOrganization({
+    name: 'TheAlphaOnes',
+    url: 'https://www.taohq.org',
+    logo: 'https://www.taohq.org/favicon.ico',
+    sameAs: [
+      'https://github.com/thealphaones',
+      'https://twitter.com/thealphaones',
+    ],
+  }),
+  defineWebSite({
+    name: 'TheAlphaOnes',
+    description: 'An independent umbrella organisation behind developer tools, software products, and experimental systems.',
+  }),
+])
 </script>
 
 <template>

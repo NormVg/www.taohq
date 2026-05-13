@@ -32,20 +32,6 @@ export default defineNuxtConfig({
     },
   },
 
-  // Schema.org — Organisation identity
-  schemaOrg: {
-    identity: {
-      type: 'Organization',
-      name: 'TheAlphaOnes',
-      url: 'https://www.taohq.org',
-      logo: 'https://www.taohq.org/favicon.ico',
-      sameAs: [
-        'https://github.com/thealphaones',
-        'https://twitter.com/thealphaones',
-      ],
-    },
-  },
-
   app: {
     head: {
       charset: 'utf-8',
