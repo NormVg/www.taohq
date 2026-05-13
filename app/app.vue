@@ -6,8 +6,7 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
-defineOgImage({
-  component: 'OgImageDefault',
+defineOgImage('OgImageDefault', {
   title: 'Building thoughtful software, systems, and lifestyle products.',
   description: 'An independent umbrella organisation behind developer tools, software products, and experimental systems.',
 })
