@@ -2,6 +2,13 @@
 import { motion, useInView } from 'motion-v'
 import { computed, ref } from 'vue'
 
+const props = defineProps({
+  minimal: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const footerColumns = [
   {
     title: 'Products',
@@ -68,9 +75,9 @@ const linkTransition = (ci: number) => computed(() =>
 </script>
 
 <template>
-  <footer id="contact" ref="footerRef" class="site-footer">
+  <footer id="contact" ref="footerRef" class="site-footer" :class="{ 'is-minimal': props.minimal }">
     <!-- Act 1: Belief statement — word by word with underlined keyword first -->
-    <div class="footer-belief">
+    <div v-if="!props.minimal" class="footer-belief">
       <p aria-label="We believe software should feel understandable, durable, and calm.">
         <motion.span v-for="(word, i) in beliefWords" :key="i" :class="{ 'belief-highlight': word.highlight }"
           style="display: inline-block; margin-right: 0.22em;"
@@ -81,7 +88,7 @@ const linkTransition = (ci: number) => computed(() =>
     </div>
 
     <!-- Act 2: Riser bars grow bottom-up sequentially -->
-    <div class="footer-risers" aria-hidden="true">
+    <div v-if="!props.minimal" class="footer-risers" aria-hidden="true">
       <motion.span v-for="n in 5" :key="n" :initial="{ scaleY: 0, transformOrigin: 'bottom' }"
         :animate="isFooterVisible ? { scaleY: 1 } : { scaleY: 0 }" :transition="riserTransition(n).value"
         style="transform-origin: bottom;" />
@@ -163,6 +170,10 @@ const linkTransition = (ci: number) => computed(() =>
 .site-footer {
   margin-top: clamp(100px, 12vw, 200px);
   position: relative;
+}
+
+.site-footer.is-minimal {
+  margin-top: clamp(60px, 8vw, 120px);
 }
 
 .footer-belief {

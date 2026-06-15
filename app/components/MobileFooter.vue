@@ -2,6 +2,13 @@
 import { motion, useInView } from 'motion-v'
 import { computed, ref } from 'vue'
 
+const props = defineProps({
+  minimal: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const footerColumns = [
   {
     title: 'Products',
@@ -51,8 +58,8 @@ const riserTransition = (n: number) => computed(() =>
 </script>
 
 <template>
-  <footer id="contact" ref="footerRef" class="mobile-footer">
-    <div class="footer-belief">
+  <footer id="contact" ref="footerRef" class="mobile-footer" :class="{ 'is-minimal': props.minimal }">
+    <div v-if="!props.minimal" class="footer-belief">
       <p aria-label="We believe software should feel understandable, durable, and calm.">
         <motion.span v-for="(word, i) in beliefWords" :key="i"
           style="display: inline-block; margin-right: 0.22em;"
@@ -62,7 +69,7 @@ const riserTransition = (n: number) => computed(() =>
       </p>
     </div>
 
-    <div class="footer-risers" aria-hidden="true">
+    <div v-if="!props.minimal" class="footer-risers" aria-hidden="true">
       <motion.span v-for="n in 5" :key="n" :initial="{ scaleY: 0, transformOrigin: 'bottom' }"
         :animate="isFooterVisible ? { scaleY: 1 } : { scaleY: 0 }" :transition="riserTransition(n).value"
         style="transform-origin: bottom;" />
@@ -133,6 +140,10 @@ const riserTransition = (n: number) => computed(() =>
 <style scoped>
 .mobile-footer {
   margin-top: 80px;
+}
+
+.mobile-footer.is-minimal {
+  margin-top: 40px;
 }
 
 .footer-belief {
