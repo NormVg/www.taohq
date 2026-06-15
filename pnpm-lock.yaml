@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  h3: 1.15.11
+
 importers:
 
   .:
@@ -13,7 +16,7 @@ importers:
         version: 4.0.0
       '@nuxtjs/seo':
         specifier: 5.3.0
-        version: 5.3.0(de0dcc9679ce1d108dd45ef74dc93934)
+        version: 5.3.0(ff418fd38920e2ed549cb8bce8b218fb)
       '@pinia/nuxt':
         specifier: 0.11.3
         version: 0.11.3(magicast@0.5.3)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.38(typescript@6.0.3)))
@@ -3586,16 +3589,6 @@ packages:
   h3@1.15.11:
     resolution: {integrity: sha512-L3THSe2MPeBwgIZVSH5zLdBBU90TOxarvhK9d04IDY2AmVS8j2Jz2LIWtwsGOU3lu2I5jCN7FNvVfY2+XyF+mg==}
 
-  h3@2.0.1-rc.22:
-    resolution: {integrity: sha512-Esv0DMIuPkCTSWCA0vO73vcTqwzH1wjSrAO1TXNu/K3up1sZHa9EKMapbmxCDYBeymC3fVTk4qxp7ogQWQ+KgA==}
-    engines: {node: '>=20.11.1'}
-    hasBin: true
-    peerDependencies:
-      crossws: ^0.4.1
-    peerDependenciesMeta:
-      crossws:
-        optional: true
-
   hasown@2.0.4:
     resolution: {integrity: sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==}
     engines: {node: '>= 0.4'}
@@ -5728,10 +5721,10 @@ snapshots:
 
   '@colordx/core@5.4.3': {}
 
-  '@devframes/hub@0.5.4(devframe@0.5.4(crossws@0.4.6(srvx@0.11.16))(typescript@6.0.3))':
+  '@devframes/hub@0.5.4(devframe@0.5.4(typescript@6.0.3))':
     dependencies:
       birpc: 4.0.0
-      devframe: 0.5.4(crossws@0.4.6(srvx@0.11.16))(typescript@6.0.3)
+      devframe: 0.5.4(typescript@6.0.3)
       nostics: 0.2.0
       pathe: 2.0.3
       perfect-debounce: 2.1.0
@@ -6724,7 +6717,7 @@ snapshots:
       - yjs
       - yup
 
-  '@nuxtjs/seo@5.3.0(de0dcc9679ce1d108dd45ef74dc93934)':
+  '@nuxtjs/seo@5.3.0(ff418fd38920e2ed549cb8bce8b218fb)':
     dependencies:
       '@nuxt/kit': 4.4.8(magicast@0.5.3)
       '@nuxtjs/robots': 6.1.1(209a6842ed9d70ea687b26496921bc59)
@@ -6733,7 +6726,7 @@ snapshots:
       nuxt-link-checker: 5.1.0(aeab44b4afeb20063b5c53ba2ec40d8a)
       nuxt-og-image: 6.6.0(da79999df6b07155d60b64ec824d9f75)
       nuxt-schema-org: 6.2.1(e1d013334aa8be938397699c4deb90bc)
-      nuxt-seo-utils: 8.3.1(32044d21b3f595045c19048770eccad1)
+      nuxt-seo-utils: 8.3.1(c784a54eb9a5896441116150af131fad)
       nuxt-site-config: 4.1.0(209a6842ed9d70ea687b26496921bc59)
       nuxtseo-shared: 5.3.0(@nuxt/schema@4.4.8)(magicast@0.5.3)(nuxt-site-config@4.1.0(209a6842ed9d70ea687b26496921bc59))(nuxt@4.4.8(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.7))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.7))(@parcel/watcher@2.5.6)(@types/node@25.9.3)(@vue/compiler-sfc@3.5.38)(cac@6.7.14)(db0@0.3.4)(ioredis@5.11.1)(lightningcss@1.32.0)(magicast@0.5.3)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.38(typescript@6.0.3)))(rollup-plugin-visualizer@7.0.1(rollup@4.62.0))(rollup@4.62.0)(srvx@0.11.16)(terser@5.48.0)(typescript@6.0.3)(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))(yaml@2.9.0))(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))(vue@3.5.38(typescript@6.0.3))
     transitivePeerDependencies:
@@ -6773,7 +6766,6 @@ snapshots:
       - axios
       - bufferutil
       - change-case
-      - crossws
       - db0
       - drauu
       - embla-carousel
@@ -7960,9 +7952,9 @@ snapshots:
 
   '@ungap/structured-clone@1.3.1': {}
 
-  '@unhead/bundler@3.1.4(crossws@0.4.6(srvx@0.11.16))(esbuild@0.28.1)(lightningcss@1.32.0)(typescript@6.0.3)(unhead@2.1.15)(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))':
+  '@unhead/bundler@3.1.4(esbuild@0.28.1)(lightningcss@1.32.0)(typescript@6.0.3)(unhead@2.1.15)(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))':
     dependencies:
-      '@vitejs/devtools-kit': 0.3.3(crossws@0.4.6(srvx@0.11.16))(typescript@6.0.3)(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))
+      '@vitejs/devtools-kit': 0.3.3(typescript@6.0.3)(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))
       magic-string: 0.30.21
       oxc-parser: 0.135.0
       oxc-walker: 1.0.0(oxc-parser@0.135.0)
@@ -7976,7 +7968,6 @@ snapshots:
     transitivePeerDependencies:
       - '@modelcontextprotocol/sdk'
       - bufferutil
-      - crossws
       - typescript
       - utf-8-validate
 
@@ -8018,11 +8009,11 @@ snapshots:
       - rollup
       - supports-color
 
-  '@vitejs/devtools-kit@0.3.3(crossws@0.4.6(srvx@0.11.16))(typescript@6.0.3)(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))':
+  '@vitejs/devtools-kit@0.3.3(typescript@6.0.3)(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))':
     dependencies:
-      '@devframes/hub': 0.5.4(devframe@0.5.4(crossws@0.4.6(srvx@0.11.16))(typescript@6.0.3))
+      '@devframes/hub': 0.5.4(devframe@0.5.4(typescript@6.0.3))
       birpc: 4.0.0
-      devframe: 0.5.4(crossws@0.4.6(srvx@0.11.16))(typescript@6.0.3)
+      devframe: 0.5.4(typescript@6.0.3)
       mlly: 1.8.2
       nostics: 0.3.0
       pathe: 2.0.3
@@ -8032,7 +8023,6 @@ snapshots:
     transitivePeerDependencies:
       - '@modelcontextprotocol/sdk'
       - bufferutil
-      - crossws
       - typescript
       - utf-8-validate
 
@@ -8662,12 +8652,12 @@ snapshots:
 
   devalue@5.8.1: {}
 
-  devframe@0.5.4(crossws@0.4.6(srvx@0.11.16))(typescript@6.0.3):
+  devframe@0.5.4(typescript@6.0.3):
     dependencies:
       '@valibot/to-json-schema': 1.7.1(valibot@1.4.1(typescript@6.0.3))
       birpc: 4.0.0
       cac: 7.0.0
-      h3: 2.0.1-rc.22(crossws@0.4.6(srvx@0.11.16))
+      h3: 1.15.11
       mrmime: 2.0.1
       nostics: 0.2.0
       pathe: 2.0.3
@@ -8675,7 +8665,6 @@ snapshots:
       ws: 8.21.0
     transitivePeerDependencies:
       - bufferutil
-      - crossws
       - typescript
       - utf-8-validate
 
@@ -9070,13 +9059,6 @@ snapshots:
       radix3: 1.1.2
       ufo: 1.6.4
       uncrypto: 0.1.3
-
-  h3@2.0.1-rc.22(crossws@0.4.6(srvx@0.11.16)):
-    dependencies:
-      rou3: 0.8.1
-      srvx: 0.11.16
-    optionalDependencies:
-      crossws: 0.4.6(srvx@0.11.16)
 
   hasown@2.0.4:
     dependencies:
@@ -9914,10 +9896,10 @@ snapshots:
       - yjs
       - yup
 
-  nuxt-seo-utils@8.3.1(32044d21b3f595045c19048770eccad1):
+  nuxt-seo-utils@8.3.1(c784a54eb9a5896441116150af131fad):
     dependencies:
       '@nuxt/kit': 4.4.8(magicast@0.5.3)
-      '@unhead/bundler': 3.1.4(crossws@0.4.6(srvx@0.11.16))(esbuild@0.28.1)(lightningcss@1.32.0)(typescript@6.0.3)(unhead@2.1.15)(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))
+      '@unhead/bundler': 3.1.4(esbuild@0.28.1)(lightningcss@1.32.0)(typescript@6.0.3)(unhead@2.1.15)(vite@7.3.5(@types/node@25.9.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(yaml@2.9.0))
       citty: 0.2.2
       consola: 3.4.2
       defu: 6.1.7
@@ -9970,7 +9952,6 @@ snapshots:
       - axios
       - bufferutil
       - change-case
-      - crossws
       - db0
       - drauu
       - embla-carousel
