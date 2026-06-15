@@ -19,12 +19,12 @@ defineOgImage('OgImageDefault', {
 })
 
 const { isDesktop } = useDevice()
-const isSplashActive = ref(true)
+const hasSeenSplash = useState('hasSeenSplash', () => false)
 </script>
 
 <template>
   <div>
-    <SplashScreen v-if="isSplashActive" @complete="isSplashActive = false" />
+    <SplashScreen v-if="!hasSeenSplash" @complete="hasSeenSplash = true" />
     <NuxtLayout :name="isDesktop ? 'default' : 'mobile'">
       <NuxtRouteAnnouncer />
       <NuxtPage />
