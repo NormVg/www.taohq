@@ -8,81 +8,90 @@ defineProps<{
 <template>
   <div
     style="
-      width: 100%;
-      height: 100%;
+      width: 1200px;
+      height: 630px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: #09090b;
-      background-image: linear-gradient(135deg, #09090b 0%, #18181b 100%);
-      color: #ffffff;
-      padding: 60px;
+      justify-content: space-between;
+      background: #000;
+      color: #fff;
+      padding: 72px 80px;
       font-family: 'Inter', sans-serif;
+      position: relative;
+      overflow: hidden;
     "
   >
-    <!-- Main Content Container -->
+    <!-- Background texture bars (mirrors footer riser aesthetic) -->
     <div
       style="
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        padding: 72px;
-        background-color: rgba(255, 255, 255, 0.03);
-        border-top: 2px solid rgba(255, 255, 255, 0.1);
-        border-left: 1px solid rgba(255, 255, 255, 0.05);
-        border-right: 1px solid rgba(255, 255, 255, 0.05);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-        border-radius: 48px;
-        box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
+        gap: 10px;
+        opacity: 0.12;
       "
     >
-      <!-- Title -->
-      <h1
-        style="
-          font-size: 96px;
-          font-weight: 800;
-          letter-spacing: -0.04em;
-          margin: 0 0 32px 0;
-          color: #ffffff;
-          line-height: 1.1;
-        "
-      >
-        {{ title || 'TheAlphaOnes' }}
-      </h1>
-      
-      <!-- Description -->
-      <p
-        style="
-          font-size: 40px;
-          font-weight: 400;
-          color: #a1a1aa;
-          max-width: 850px;
-          line-height: 1.5;
-          letter-spacing: -0.01em;
-          margin: 0;
-        "
-      >
-        {{ description || 'Independent software, systems, and digital products designed to feel calm under pressure.' }}
-      </p>
+      <div style="height: 8px; background: #fff; width: 100%" />
+      <div style="height: 13px; background: #fff; width: 100%" />
+      <div style="height: 21px; background: #fff; width: 100%" />
+      <div style="height: 34px; background: #fff; width: 100%" />
+      <div style="height: 55px; background: #fff; width: 100%" />
+    </div>
 
-      <!-- Bottom Branding inside the card -->
+    <!-- Top: wordmark -->
+    <div
+      style="
+        font-family: 'Inter', sans-serif;
+        font-size: 22px;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        color: rgba(255,255,255,0.5);
+      "
+    >
+      TheAlphaOnes
+    </div>
+
+    <!-- Middle: title -->
+    <div style="flex: 1; display: flex; align-items: center;">
       <div
         style="
-          display: flex;
-          align-items: center;
-          margin-top: auto;
+          font-size: 72px;
+          font-weight: 400;
+          line-height: 1.05;
+          letter-spacing: -0.02em;
+          max-width: 900px;
+          color: #fff;
         "
       >
-        <div style="font-size: 32px; font-weight: 700; letter-spacing: -0.02em; color: #ffffff;">
-          TheAlphaOnes
-        </div>
-        <div style="width: 8px; height: 8px; border-radius: 4px; background-color: #52525b; margin: 0 24px;"></div>
-        <div style="font-size: 32px; font-weight: 400; color: #a1a1aa;">
-          taohq.org
-        </div>
+        {{ title || 'Independent software, systems, and digital products designed to feel calm under pressure.' }}
+      </div>
+    </div>
+
+    <!-- Bottom: description + domain -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <div
+        style="
+          font-size: 24px;
+          line-height: 1.4;
+          color: rgba(255,255,255,0.55);
+          max-width: 700px;
+        "
+      >
+        {{ description || 'An independent umbrella organisation behind developer tools, software products, and experimental systems.' }}
+      </div>
+      <div
+        style="
+          font-size: 20px;
+          color: rgba(255,255,255,0.4);
+          white-space: nowrap;
+          margin-left: 40px;
+        "
+      >
+        taohq.org
       </div>
     </div>
   </div>
