@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { motion, useInView } from 'motion-v'
 import { computed, ref } from 'vue'
+import { useState } from '#app'
+
+const hasSeenSplash = useState('hasSeenSplash', () => false)
+const wasSplashSeen = hasSeenSplash.value
+
+const delayText = wasSplashSeen ? 0.0 : 2.4
+const delayThoughtful = wasSplashSeen ? 0.0 : 1.6
+const delayLifestyle = wasSplashSeen ? 0.0 : 2.0
+const delayMedia = wasSplashSeen ? 0.0 : 1.2
+
 
 const introWords = "TheAlphaOnes is an independent umbrella organisation behind developer tools, software products, and experimental systems.".split(" ")
 
@@ -23,15 +33,15 @@ const wordTransition = (i: number) => computed(() =>
 <template>
   <section id="top" class="hero-section" aria-labelledby="hero-title">
     <h1 id="hero-title">
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }">
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: delayText, duration: 1.2 }">
         Building </motion.span>
       <motion.span :initial="{ opacity: 0, y: 14 }" :animate="{ opacity: 1, y: 0 }"
-        :transition="{ delay: 1.0, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">thoughtful</motion.span>
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }">
+        :transition="{ delay: delayThoughtful, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">thoughtful</motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: delayText, duration: 1.2 }">
         <br>software, systems, and<br></motion.span>
       <motion.span :initial="{ opacity: 0, y: 14 }" :animate="{ opacity: 1, y: 0 }"
-        :transition="{ delay: 1.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">lifestyle</motion.span>
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 1.8, duration: 1.2 }">
+        :transition="{ delay: delayLifestyle, duration: 1.2, ease: [0.22, 1, 0.36, 1] }" class="highlight">lifestyle</motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: delayText, duration: 1.2 }">
         products.</motion.span>
     </h1>
 
@@ -43,7 +53,7 @@ const wordTransition = (i: number) => computed(() =>
     <motion.div class="hero-media" aria-label="Group working around computers"
       :initial="{ opacity: 0, scale: 0.98, filter: 'blur(8px)' }"
       :animate="{ opacity: 1, scale: 1, filter: 'blur(0px)' }"
-      :transition="{ delay: 0.2, duration: 1.8, ease: [0.22, 1, 0.36, 1] }">
+      :transition="{ delay: delayMedia, duration: 1.8, ease: [0.22, 1, 0.36, 1] }">
       <img class="hero-image" src="/figma/hero-mask-image.png" alt="Black and white group working around computers">
     </motion.div>
 

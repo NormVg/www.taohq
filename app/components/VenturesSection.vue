@@ -185,7 +185,10 @@ onUnmounted(() => {
 
       <!-- Scroll indicator -->
       <div class="ventures-scroll-hint" :class="{ 'is-hidden': activeIndex === ventures.length - 1 }">
-        <span class="ventures-scroll-dot" />
+        <span class="ventures-scroll-label">Scroll</span>
+        <div class="ventures-scroll-mouse">
+          <span class="ventures-scroll-dot" />
+        </div>
       </div>
     </div>
   </section>
@@ -368,32 +371,49 @@ onUnmounted(() => {
   position: absolute;
   transform: translateX(-50%);
   transition: opacity 400ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .ventures-scroll-hint.is-hidden {
   opacity: 0;
+  pointer-events: none;
+}
+
+.ventures-scroll-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  opacity: 0.5;
+}
+
+.ventures-scroll-mouse {
+  width: 22px;
+  height: 36px;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+  opacity: 0.6;
 }
 
 .ventures-scroll-dot {
-  animation: scroll-bounce 1.6s ease-in-out infinite;
+  animation: scroll-bounce 1.8s ease-in-out infinite;
   background: var(--ink);
   border-radius: 50%;
   display: block;
   height: 6px;
-  opacity: 0.35;
   width: 6px;
 }
 
 @keyframes scroll-bounce {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(8px);
-  }
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(10px); opacity: 0.5; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 /* ── Responsive ── */
