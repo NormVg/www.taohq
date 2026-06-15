@@ -15,8 +15,13 @@ const article = computed(() => {
 
 useSeoMeta({
   title: article.value?.title || 'Journal',
-  description: article.value?.excerpt,
-  ogImage: article.value?.bannerImage
+  description: article.value?.excerpt
+})
+
+defineOgImage('Article', {
+  title: article.value?.title,
+  author: article.value?.author,
+  date: article.value?.date ? new Date(article.value.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : undefined
 })
 </script>
 
