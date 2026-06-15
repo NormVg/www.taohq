@@ -32,9 +32,7 @@ defineProps<{
         bottom: 48px;
         font-size: 20px;
         font-weight: 400;
-        letter-spacing: 0.15em;
         color: rgba(255, 255, 255, 0.4);
-        text-transform: uppercase;
       "
     >
       taohq.org
