@@ -44,7 +44,7 @@ useSeoMeta({
     <article class="article-content">
       <div class="article-content-container">
         <!-- Render the markdown -->
-        <MarkdownRender :markdown="article.content" class="markstream-renderer" />
+        <MarkdownRender :content="article.content" class="markstream-renderer" />
       </div>
     </article>
   </main>
