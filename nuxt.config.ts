@@ -14,10 +14,9 @@ export default defineNuxtConfig({
     blockNonSeoBots: true
   },
   ogImage: {
-    defaults: {
-      width: 1200,
-      height: 630,
-      cacheMaxAgeSeconds: 60 * 60 * 24 * 7
-    }
+    zeroRuntime: true
+  },
+  sitemap: {
+    zeroRuntime: true
   }
 })
