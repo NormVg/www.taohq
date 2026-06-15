@@ -2,33 +2,37 @@
 import { motion } from 'motion-v'
 
 const navItems = [
-  { label: 'Products', href: '#products' },
-  { label: 'Organization', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Products', href: '/#products' },
+  { label: 'Organization', href: '/#about' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/#contact' },
 ]
 </script>
 
 <template>
   <header class="site-header" aria-label="Primary navigation">
     <nav class="nav-links">
-      <a
+      <NuxtLink
         v-for="item in navItems"
         :key="item.label"
-        :href="item.href"
+        :to="item.href"
       >
         {{ item.label }}
-      </a>
+      </NuxtLink>
     </nav>
-    <motion.a
-      class="wordmark"
-      href="#top"
-      aria-label="TheAlphaOnes home"
-      :initial="{ opacity: 0, x: 10, filter: 'blur(4px)' }"
-      :animate="{ opacity: 1, x: 0, filter: 'blur(0px)' }"
-      :transition="{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }"
-    >
-      TheAlphaOnes
-    </motion.a>
+    <NuxtLink custom to="/" v-slot="{ href, navigate }">
+      <motion.a
+        class="wordmark"
+        :href="href"
+        @click="navigate"
+        aria-label="TheAlphaOnes home"
+        :initial="{ opacity: 0, x: 10, filter: 'blur(4px)' }"
+        :animate="{ opacity: 1, x: 0, filter: 'blur(0px)' }"
+        :transition="{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }"
+      >
+        TheAlphaOnes
+      </motion.a>
+    </NuxtLink>
   </header>
 </template>
 
