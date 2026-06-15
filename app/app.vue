@@ -13,9 +13,9 @@ useSchemaOrg([
   })
 ])
 
-defineOgImage('NuxtSeo', {
-  theme: '#000000',
-  colorMode: 'dark',
+defineOgImage('OgImageDefault', {
+  title: 'TheAlphaOnes',
+  description: 'Independent software, systems, and digital products designed to feel calm under pressure.'
 })
 
 const { isDesktop } = useDevice()
