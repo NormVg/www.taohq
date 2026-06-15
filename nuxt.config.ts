@@ -2,6 +2,15 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', '@nuxtjs/device'],
-  css: ['~/assets/css/main.css']
+  modules: ['@pinia/nuxt', '@nuxtjs/device', '@nuxtjs/seo'],
+  css: ['~/assets/css/main.css'],
+  site: {
+    url: 'https://taohq.org',
+    name: 'TheAlphaOnes',
+    description: 'Independent software, systems, and digital products designed to feel calm under pressure.',
+    defaultLocale: 'en'
+  },
+  robots: {
+    blockNonSeoBots: true
+  }
 })

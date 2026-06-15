@@ -36,7 +36,7 @@ const wordTransition = (i: number) => computed(() =>
     </h1>
 
     <div class="hero-actions" aria-label="Hero actions">
-      <a class="hero-link hero-link-primary" href="#projects">Explore projects</a>
+      <a class="hero-link hero-link-primary" href="#products">Explore products</a>
       <a class="hero-link" href="#about">View organization</a>
     </div>
 

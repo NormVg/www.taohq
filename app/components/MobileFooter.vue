@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 
 const footerColumns = [
   {
-    title: 'Projects',
+    title: 'Products',
     links: ['Products', 'Developer Tools', 'Experiments', 'Research'],
   },
   {
@@ -88,7 +88,11 @@ const riserTransition = (n: number) => computed(() =>
       <div class="footer-bottom">
         <div class="footer-copyright">
           <p>taohq.org</p>
-          <p>TheAlphaOnes © 2024</p>
+          <p>TheAlphaOnes © 2026</p>
+          <div class="footer-legal">
+            <NuxtLink to="/privacy">Privacy</NuxtLink>
+            <NuxtLink to="/terms">Terms</NuxtLink>
+          </div>
         </div>
 
         <ul class="social-links" aria-label="Social links">
@@ -233,6 +237,18 @@ const riserTransition = (n: number) => computed(() =>
 
 .footer-copyright p + p {
   margin-top: 8px;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.footer-legal a {
+  color: rgb(255 255 255 / 40%);
+  text-decoration: none;
 }
 
 .social-links {

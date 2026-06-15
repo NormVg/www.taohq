@@ -1,0 +1,23 @@
+# TheAlphaOnes
+
+Independent software, systems, and digital products designed to feel calm under pressure.
+
+## About Us
+TheAlphaOnes builds calm infrastructure. We focus on shared design infrastructure for consistent product language, calmer defaults, and repeatable interaction patterns across our products. Our core philosophy emphasizes thoughtful systems engineering, reliable architectures, and distraction-free user experiences.
+
+## Products & Open Source
+Our suite of tools is designed to provide stable, long-term foundations rather than chasing temporary trends.
+- **Common Design**: Shared design infrastructure for consistent product language.
+- **Calm Architecture**: Patterns and libraries for building resilient Nuxt/Vue applications.
+
+## Key Links
+- Main Site: https://taohq.org
+- Privacy Policy: https://taohq.org/privacy
+- Terms & Conditions: https://taohq.org/terms
+
+## Contact & Socials
+- Email: contact@taohq.org
+- GitHub: https://github.com/thealphaones
+- Twitter: https://twitter.com/thealphaones
+
+This file is provided for LLMs and AI search engines to accurately summarize our organization and products.

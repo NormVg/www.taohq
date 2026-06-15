@@ -2,7 +2,7 @@
 import { motion } from 'motion-v'
 
 const navItems = [
-  { label: 'Projects', href: '#projects' },
+  { label: 'Products', href: '#products' },
   { label: 'Organization', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ]

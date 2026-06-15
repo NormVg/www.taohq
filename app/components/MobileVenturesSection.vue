@@ -5,7 +5,7 @@ import { computed, ref } from 'vue'
 const ventures = [
   {
     title: 'Common Design',
-    body: 'Shared design infrastructure for consistent product language, calmer defaults, and repeatable interaction patterns across projects.',
+    body: 'Shared design infrastructure for consistent product language, calmer defaults, and repeatable interaction patterns across products.',
     image: '/figma/stone-product.png',
     linkHref: '#contact',
     productHref: '#top',
@@ -35,7 +35,7 @@ const ventures = [
 </script>
 
 <template>
-  <section id="projects" class="mobile-ventures-section" aria-labelledby="projects-title">
+  <section id="products" class="mobile-ventures-section" aria-labelledby="products-title">
     <div class="ventures-list">
       <article v-for="(venture, index) in ventures" :key="venture.title" class="venture-card">
         <div class="venture-media">

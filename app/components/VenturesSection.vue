@@ -14,7 +14,7 @@ type Venture = {
 const ventures: Venture[] = [
   {
     title: 'Common Design',
-    body: 'Shared design infrastructure for consistent product language, calmer defaults, and repeatable interaction patterns across projects.',
+    body: 'Shared design infrastructure for consistent product language, calmer defaults, and repeatable interaction patterns across products.',
     image: '/figma/stone-product.png',
     imagePosition: 'center 56%',
     linkHref: '#contact',
@@ -129,7 +129,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section id="projects" ref="sectionRef" class="ventures-section" aria-labelledby="projects-title" :style="{ height: `${ventures.length * 100}vh` }">
+  <section id="products" ref="sectionRef" class="ventures-section" aria-labelledby="products-title" :style="{ height: `${ventures.length * 100}vh` }">
 
     <div class="ventures-sticky-frame">
       <div class="ventures-viewport">
