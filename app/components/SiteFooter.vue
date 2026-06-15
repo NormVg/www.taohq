@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 
 const footerColumns = [
   {
-    title: 'Ventures',
+    title: 'Projects',
     links: ['Products', 'Developer Tools', 'Experiments', 'Research'],
   },
   {

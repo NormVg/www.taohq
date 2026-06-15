@@ -22,9 +22,4 @@ logs
 .env
 .env.*
 !.env.example
-
-*.taohq
-.kiro
-.agents
-.agent
-
+.info2ai

@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 
 const principles = [
   {
-    title: 'Calm Infrastructure',
+    title: 'Infrastructure',
     body: 'We design systems that prioritize utility over disruption. Our infrastructure is built to remain invisible, operating with a quiet reliability that allows users to focus on their work rather than the tools they use.',
   },
   {
