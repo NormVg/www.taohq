@@ -19,8 +19,5 @@ export default defineNuxtConfig({
       height: 630,
       cacheMaxAgeSeconds: 60 * 60 * 24 * 7
     }
-  },
-  sitemap: {
-    zeroRuntime: true
   }
 })
