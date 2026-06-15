@@ -12,5 +12,11 @@ export default defineNuxtConfig({
   },
   robots: {
     blockNonSeoBots: true
+  },
+  ogImage: {
+    zeroRuntime: true
+  },
+  sitemap: {
+    zeroRuntime: true
   }
 })
