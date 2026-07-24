@@ -4,16 +4,16 @@ import { motion, useInView } from 'motion-v'
 import { blogs } from '~/data/blogs'
 
 const sectionRef = ref<HTMLElement | null>(null)
-const isVisible = useInView(sectionRef, { once: true, amount: 0.1 })
+const isVisible = useInView(sectionRef, { once: false, amount: 0.1, margin: "-15% 0px -15% 0px" })
 
 const containerAnimate = computed(() => isVisible.value
-  ? { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-  : { opacity: 0, y: 16 }
+  ? { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] } }
+  : { opacity: 0, y: -14, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
 )
 
 const itemAnimate = (i: number) => computed(() => isVisible.value
-  ? { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] } }
-  : { opacity: 0, y: 12 }
+  ? { opacity: 1, y: 0, transition: { duration: 1.2, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] } }
+  : { opacity: 0, y: -14, transition: { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] } }
 )
 </script>
 

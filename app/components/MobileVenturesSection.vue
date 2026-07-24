@@ -32,28 +32,65 @@ const ventures = [
     productHref: '#top',
   },
 ]
+
+const cardRef0 = ref<HTMLElement | null>(null)
+const cardRef1 = ref<HTMLElement | null>(null)
+const cardRef2 = ref<HTMLElement | null>(null)
+const cardRef3 = ref<HTMLElement | null>(null)
+
+const isVisible0 = useInView(cardRef0, { once: false, amount: 0.1, margin: "-15% 0px -15% 0px" })
+const isVisible1 = useInView(cardRef1, { once: false, amount: 0.1, margin: "-15% 0px -15% 0px" })
+const isVisible2 = useInView(cardRef2, { once: false, amount: 0.1, margin: "-15% 0px -15% 0px" })
+const isVisible3 = useInView(cardRef3, { once: false, amount: 0.1, margin: "-15% 0px -15% 0px" })
+
+const cardRefs = [cardRef0, cardRef1, cardRef2, cardRef3]
+const isVisibleArr = [isVisible0, isVisible1, isVisible2, isVisible3]
+
+const mediaAnimate = (i: number) => computed(() => isVisibleArr[i].value ? { opacity: 1, scale: 1, filter: 'blur(0px)' } : { opacity: 0, scale: 0.95, filter: 'blur(4px)' })
+const headerAnimate = (i: number) => computed(() => isVisibleArr[i].value ? { opacity: 1, y: 0 } : { opacity: 0, y: -14 })
+const bodyAnimate = (i: number) => computed(() => isVisibleArr[i].value ? { opacity: 1, filter: 'blur(0px)' } : { opacity: 0, filter: 'blur(4px)' })
+const linksAnimate = (i: number) => computed(() => isVisibleArr[i].value ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 })
+
+const mediaTransition = (i: number) => computed(() => isVisibleArr[i].value ? { duration: 1.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] } : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] })
+const headerTransition = (i: number) => computed(() => isVisibleArr[i].value ? { duration: 1.0, delay: 0.2, ease: [0.22, 1, 0.36, 1] } : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] })
+const bodyTransition = (i: number) => computed(() => isVisibleArr[i].value ? { duration: 1.0, delay: 0.3, ease: [0.22, 1, 0.36, 1] } : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] })
+const linksTransition = (i: number) => computed(() => isVisibleArr[i].value ? { duration: 1.0, delay: 0.4, ease: [0.22, 1, 0.36, 1] } : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] })
 </script>
 
 <template>
   <section id="products" class="mobile-ventures-section" aria-labelledby="products-title">
     <div class="ventures-list">
-      <article v-for="(venture, index) in ventures" :key="venture.title" class="venture-card">
-        <div class="venture-media">
+      <article v-for="(venture, index) in ventures" :key="venture.title" class="venture-card" :ref="cardRefs[index]">
+        <motion.div class="venture-media"
+          :initial="{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }"
+          :animate="mediaAnimate(index).value"
+          :transition="mediaTransition(index).value">
           <img :src="venture.image" :alt="venture.title" class="venture-image" />
-        </div>
+        </motion.div>
         
         <div class="venture-content">
-          <div class="venture-header">
+          <motion.div class="venture-header"
+            :initial="{ opacity: 0, y: 14 }"
+            :animate="headerAnimate(index).value"
+            :transition="headerTransition(index).value">
             <span class="venture-index">{{ index }}.</span>
             <h3 class="venture-title">{{ venture.title }}</h3>
-          </div>
+          </motion.div>
           
-          <p class="venture-body">{{ venture.body }}</p>
+          <motion.p class="venture-body"
+            :initial="{ opacity: 0, filter: 'blur(4px)' }"
+            :animate="bodyAnimate(index).value"
+            :transition="bodyTransition(index).value">
+            {{ venture.body }}
+          </motion.p>
           
-          <div class="venture-links">
+          <motion.div class="venture-links"
+            :initial="{ opacity: 0, y: 10 }"
+            :animate="linksAnimate(index).value"
+            :transition="linksTransition(index).value">
             <a :href="venture.linkHref">Link</a>
             <a :href="venture.productHref">Product</a>
-          </div>
+          </motion.div>
         </div>
       </article>
     </div>

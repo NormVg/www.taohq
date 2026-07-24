@@ -16,15 +16,27 @@ const principles = [
 const sectionRef = ref<HTMLElement | null>(null)
 const isVisible = useInView(sectionRef, { once: false, amount: 0.1, margin: "0px 0px -10% 0px" })
 
+const headingAnimate = (i: number) => computed(() =>
+  isVisible.value
+    ? { opacity: 1, y: 0 }
+    : { opacity: 0, y: -14 }
+)
+
 const headingTransition = (i: number) => computed(() =>
   isVisible.value
-    ? { duration: 0.8, delay: i * 0.2, ease: [0.22, 1, 0.36, 1] }
-    : { duration: 0.4, delay: 0, ease: [0.22, 1, 0.36, 1] }
+    ? { duration: 1.2, delay: i * 0.2, ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] }
 )
+const bodyAnimate = (i: number) => computed(() =>
+  isVisible.value
+    ? { opacity: 1, filter: 'blur(0px)' }
+    : { opacity: 0, filter: 'blur(4px)' }
+)
+
 const bodyTransition = (i: number) => computed(() =>
   isVisible.value
-    ? { duration: 0.8, delay: 0.1 + i * 0.2, ease: [0.22, 1, 0.36, 1] }
-    : { duration: 0.4, delay: 0, ease: [0.22, 1, 0.36, 1] }
+    ? { duration: 1.2, delay: 0.1 + i * 0.2, ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] }
 )
 </script>
 
@@ -39,13 +51,13 @@ const bodyTransition = (i: number) => computed(() =>
       <article v-for="(principle, i) in principles" :key="principle.title" class="principle">
         <motion.h2
           :initial="{ opacity: 0, y: 10 }"
-          :animate="isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }"
+          :animate="headingAnimate(i).value"
           :transition="headingTransition(i).value">
           {{ principle.title }}
         </motion.h2>
         <motion.p
           :initial="{ opacity: 0, filter: 'blur(4px)' }"
-          :animate="isVisible ? { opacity: 1, filter: 'blur(0px)' } : { opacity: 0, filter: 'blur(4px)' }"
+          :animate="bodyAnimate(i).value"
           :transition="bodyTransition(i).value">
           {{ principle.body }}
         </motion.p>

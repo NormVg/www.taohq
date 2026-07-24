@@ -4,34 +4,52 @@ import { computed, ref } from 'vue'
 
 const introWords = "TheAlphaOnes is an independent umbrella organisation behind developer tools, software products, and experimental systems.".split(" ")
 
+const sectionRef = ref<HTMLElement | null>(null)
+const isVisible = useInView(sectionRef, { once: false, amount: 0.1, margin: "-15% 0px -15% 0px" })
+
+const titleAnimate = computed(() => isVisible.value 
+  ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+  : { opacity: 0, y: -12, filter: 'blur(4px)' }
+)
+
+const imageAnimate = computed(() => isVisible.value
+  ? { opacity: 1, scale: 1, filter: 'blur(0px)' }
+  : { opacity: 0, scale: 0.95, filter: 'blur(4px)' }
+)
+
+const titleTransition = (delay: number) => computed(() => isVisible.value
+  ? { delay, duration: 1, ease: [0.22, 1, 0.36, 1] }
+  : { delay: 0, duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+)
+
 const introRef = ref<HTMLElement | null>(null)
-const isIntroVisible = useInView(introRef, { once: false, amount: 0.3, margin: "-10% 0px 0px 0px" })
+const isIntroVisible = useInView(introRef, { once: false, amount: 0.3, margin: "0px 0px -15% 0px" })
 
 const wordAnimate = (i: number) => computed(() =>
   isIntroVisible.value
     ? { opacity: 1, y: 0, filter: 'blur(0px)' }
-    : { opacity: 0, y: -10, filter: 'blur(4px)' }
+    : { opacity: 0, y: -12, filter: 'blur(4px)' }
 )
 
 const wordTransition = (i: number) => computed(() =>
   isIntroVisible.value
     ? { duration: 0.6, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }
-    : { duration: 0.4, delay: 0, ease: [0.22, 1, 0.36, 1] }
+    : { duration: 0.8, delay: 0, ease: [0.22, 1, 0.36, 1] }
 )
 </script>
 
 <template>
-  <section id="top" class="mobile-hero-section" aria-labelledby="hero-title">
+  <section id="top" class="mobile-hero-section" aria-labelledby="hero-title" ref="sectionRef">
     <h1 id="hero-title">
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 0.6, duration: 1 }">
+      <motion.span :initial="{ opacity: 0 }" :animate="titleAnimate.value" :transition="titleTransition(0.6).value">
         Building </motion.span>
-      <motion.span :initial="{ opacity: 0, y: 10 }" :animate="{ opacity: 1, y: 0 }"
-        :transition="{ delay: 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }" class="highlight">thoughtful</motion.span>
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 0.6, duration: 1 }">
+      <motion.span :initial="{ opacity: 0, y: 10 }" :animate="titleAnimate.value"
+        :transition="titleTransition(0.2).value" class="highlight">thoughtful</motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="titleAnimate.value" :transition="titleTransition(0.6).value">
         <br>software, systems, and<br></motion.span>
-      <motion.span :initial="{ opacity: 0, y: 10 }" :animate="{ opacity: 1, y: 0 }"
-        :transition="{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }" class="highlight">lifestyle</motion.span>
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :transition="{ delay: 0.6, duration: 1 }">
+      <motion.span :initial="{ opacity: 0, y: 10 }" :animate="titleAnimate.value"
+        :transition="titleTransition(0.4).value" class="highlight">lifestyle</motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="titleAnimate.value" :transition="titleTransition(0.6).value">
         products.</motion.span>
     </h1>
 
@@ -42,8 +60,8 @@ const wordTransition = (i: number) => computed(() =>
 
     <motion.div class="hero-media"
       :initial="{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }"
-      :animate="{ opacity: 1, scale: 1, filter: 'blur(0px)' }"
-      :transition="{ delay: 0.1, duration: 1.2, ease: [0.22, 1, 0.36, 1] }">
+      :animate="imageAnimate.value"
+      :transition="isVisible.value ? { delay: 0.1, duration: 1.2, ease: [0.22, 1, 0.36, 1] } : { delay: 0, duration: 0.8, ease: [0.22, 1, 0.36, 1] }">
       <img class="hero-image" src="/figma/hero-mask-image.png" alt="Black and white group working around computers">
     </motion.div>
 
