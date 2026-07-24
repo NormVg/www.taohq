@@ -8,8 +8,20 @@ const isHomepage = computed(() => route.path === '/')
 
 <template>
   <div class="site-shell">
-    <SiteHeader />
+    <SiteHeader class="desktop-only" />
+    <MobileHeader class="mobile-only" />
     <slot />
-    <SiteFooter :minimal="!isHomepage" />
+    <SiteFooter class="desktop-only" :minimal="!isHomepage" />
+    <MobileFooter class="mobile-only" :minimal="!isHomepage" />
   </div>
 </template>
+
+<style>
+.desktop-only { display: block; }
+.mobile-only { display: none; }
+
+@media (max-width: 980px) {
+  .desktop-only { display: none !important; }
+  .mobile-only { display: block !important; }
+}
+</style>

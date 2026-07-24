@@ -25,7 +25,7 @@ const hasSeenSplash = useState('hasSeenSplash', () => false)
 <template>
   <div>
     <SplashScreen v-if="!hasSeenSplash" @complete="hasSeenSplash = true" />
-    <NuxtLayout :name="isDesktop ? 'default' : 'mobile'">
+    <NuxtLayout>
       <NuxtRouteAnnouncer />
       <NuxtPage />
     </NuxtLayout>

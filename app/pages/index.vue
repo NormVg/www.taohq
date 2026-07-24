@@ -1,17 +1,17 @@
 <template>
   <div>
-    <template v-if="$device.isDesktop">
+    <div class="desktop-only">
       <HeroSection />
       <PrinciplesSection />
       <VenturesSection />
       <BlogPreviewSection />
-    </template>
-    <template v-else>
+    </div>
+    <div class="mobile-only">
       <MobileHeroSection />
       <MobilePrinciplesSection />
       <MobileVenturesSection />
       <MobileBlogPreviewSection />
-    </template>
+    </div>
   </div>
 </template>
 
